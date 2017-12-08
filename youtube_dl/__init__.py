@@ -424,6 +424,8 @@ def _real_main(argv=None):
         'config_location': opts.config_location,
         'geo_bypass': opts.geo_bypass,
         'geo_bypass_country': opts.geo_bypass_country,
+        'cr_unblocker': opts.cr_unblocker,
+        'cr_unblocker_url': opts.cr_unblocker_url,
         # just for deprecation check
         'autonumber': opts.autonumber if opts.autonumber is True else None,
         'usetitle': opts.usetitle if opts.usetitle is True else None,

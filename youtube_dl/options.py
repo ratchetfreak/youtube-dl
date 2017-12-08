@@ -249,6 +249,14 @@ def parseOpts(overrideArguments=None):
         '--geo-bypass-country', metavar='CODE',
         dest='geo_bypass_country', default=None,
         help='Force bypass geographic restriction with explicitly provided two-letter ISO 3166-2 country code (experimental)')
+    geo.add_option(
+        '--cr-unblocker', action='store_true', 
+        dest='cr_unblocker', default=False,
+        help='Bypass Crunchyroll geographic restriction using US session id')
+    geo.add_option(
+        '--cr-unblocker-url', metavar='URL',
+        dest='cr_unblocker_url', default=None,
+        help='Select custom server for cr-unlbocker')
 
     selection = optparse.OptionGroup(parser, 'Video Selection')
     selection.add_option(

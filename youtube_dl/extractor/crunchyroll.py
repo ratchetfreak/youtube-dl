@@ -50,9 +50,23 @@ class CrunchyrollBaseIE(InfoExtractor):
 
     def _login(self):
         (username, password) = self._get_login_info()
+        self.to_screen(self._downloader.params.get('cr_unblocker', True))
+        if self._downloader.params.get('cr_unblocker', False):
+            url = self._downloader.params.get('cr_unblocker_url', 'https://api2.cr-unblocker.com/start_session?version=1.1')
+            if url == None: 
+                url = 'https://api2.cr-unblocker.com/start_session?version=1.1'
+            self.to_screen(url)
+            content = self._download_json(
+                url,
+                None, 'Logging in with cr-unblocker', 'Wrong login info', fatal=False)
+            self.to_screen(content)
+            session_id = content['data']['session_id']
+            self.to_screen(session_id)
+            self._set_cookie(".crunchyroll.com", "session_id", session_id)
+            self._set_cookie(".crunchyroll.com", "sess_id", session_id)
+            return
         if username is None:
             return
-
         self._download_webpage(
             'https://www.crunchyroll.com/?a=formhandler',
             None, 'Logging in', 'Wrong login info',
